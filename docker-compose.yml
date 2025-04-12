@@ -1,0 +1,42 @@
+services:
+  frontend:
+    build: ./frontend
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      VITE_BACKEND_URL: http://localhost:8000
+    depends_on:
+      - backend
+
+  backend:
+    build: ./backend
+    command: bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - ./backend:/app
+    environment:
+      DEBUG: "1"
+      SECRET_KEY: changeme
+      DB_NAME: netflix_db
+      DB_USER: netflix_user
+      DB_PASSWORD: netflix_pass
+      DB_HOST: db
+    depends_on:
+      - db
+  
+  db:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_DB: netflix_db
+      POSTGRES_USER: netflix_user
+      POSTGRES_PASSWORD: netflix_pass
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+volumes:
+  postgres_data:
