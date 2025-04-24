@@ -1,12 +1,26 @@
-<script setup>
-import WelcomeItem from './WelcomeItem.vue'
-import DocumentationIcon from './icons/IconDocumentation.vue'
-import ToolingIcon from './icons/IconTooling.vue'
-import EcosystemIcon from './icons/IconEcosystem.vue'
-import CommunityIcon from './icons/IconCommunity.vue'
-import SupportIcon from './icons/IconSupport.vue'
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyAPIED_HYvdQFevlVCATaVLtygr7YPVFLU",
+  authDomain: "netflix-clon-b6f21.firebaseapp.com",
+  projectId: "netflix-clon-b6f21",
 
-const openReadmeInEditor = () => fetch('/__open-in-editor?file=README.md')
+};
+
+firebase.initializeApp(firebaseConfig);
+
+function login() {
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  firebase.auth().signInWithEmailAndPassword(email, password)
+    .then(userCred => userCred.user.getIdToken())
+    .then(token => {
+      document.getElementById("output").innerText = token;
+    })
+    .catch(err => {
+      document.getElementById("output").innerText = err.message;
+    });
+}
 </script>
 
 <template>
