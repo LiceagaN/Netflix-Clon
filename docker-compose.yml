@@ -27,6 +27,8 @@ services:
       DB_HOST: db
     depends_on:
       - db
+    env_file:
+      - .env
   
   db:
     image: postgres:latest

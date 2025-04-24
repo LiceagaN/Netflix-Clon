@@ -7,7 +7,11 @@ class User(models.Model):
     email = models.EmailField(unique=True, null=True)
     name = models.CharField(max_length=255, null=True, blank=True)
     creation_date = models.DateTimeField(auto_now_add=True)
-
+    
+    @property
+    def is_authenticated(self):
+        return True  # Requerido por DRF para que pase el check
+    
     def __str__(self):
         return self.name or self.firebase_uid
 
