@@ -16,6 +16,9 @@ class VideoViewSet(viewsets.ReadOnlyModelViewSet):
     filter_backends = [filters.SearchFilter]
     search_fields = ['title', 'description']
 
+    authentication_classes = [FirebaseAuthentication]
+    permission_classes = [IsAuthenticated]
+
 class ViewCreateView(APIView):
     authentication_classes = [FirebaseAuthentication]
     permission_classes = [IsAuthenticated]

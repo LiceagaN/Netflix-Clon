@@ -28,6 +28,7 @@ class Tag(models.Model):
         return self.name
     
 class Video(models.Model):
+    uploaded_by = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True)
     category = models.CharField(max_length=100)
@@ -36,6 +37,9 @@ class Video(models.Model):
     duration = models.DurationField()
     tags = models.ManyToManyField(Tag, blank=True)
     upload_date = models.DateTimeField(auto_now_add=True)
+
+    def perfome_create(self, serializer):
+        serializer.save(uploaded_by=self.request.user)
 
     def __str__(self):
         return self.title
