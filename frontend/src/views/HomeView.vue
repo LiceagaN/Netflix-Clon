@@ -1,9 +1,9 @@
 <script setup>
-import TheWelcome from '../components/TheWelcome.vue'
+import FirebaseToke from '@/components/FirebaseToke.vue';
 </script>
 
 <template>
   <main>
-    <TheWelcome />
+    <FirebaseToke />
   </main>
 </template>

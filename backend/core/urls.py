@@ -10,7 +10,7 @@ from .views import (
 router = DefaultRouter()
 router.register(r'videos', VideoViewSet, basename='video')
 
-url_patterns = [
+urlpatterns = [
     path('', include(router.urls)),
     path('view/', ViewCreateView.as_view(), name='view-create'),
     path('favorite/', FavoriteCreateDestroyView.as_view(), name='favorite-create-destroy'),
