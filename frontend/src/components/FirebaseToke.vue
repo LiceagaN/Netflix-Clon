@@ -25,9 +25,9 @@
   
   // 🔐 Configuración Firebase
   const firebaseConfig = {
-    apiKey: "AIzaSyAPIED_HYvdQFevlVCATaVLtygr7YPVFLU",
-    authDomain: "netflix-clon-b6f21.firebaseapp.com",
-    projectId: "netflix-clon-b6f21",
+    apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+    authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+    projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
   }
   
   const app = initializeApp(firebaseConfig)
